@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/visit", "destination": "https://vodds.com/ru/?utm_source=vbet-ua", "statusCode": 307 },
+    { "source": "/visit/", "destination": "https://vodds.com/ru/?utm_source=vbet-ua", "statusCode": 307 }
+  ]
+}
