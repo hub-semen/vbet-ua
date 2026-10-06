@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VBET — Ставки на спорт, Live та Казино онлайн</title>
+<meta name="description" content="VBET — офіційний бренд. Прематч і live-ставки, широка лінія, швидкі виплати, бонуси та мобільний застосунок.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --bg:#FFFFFF;
+    --bg-soft:#FBF4F8;
+    --surface:#FFFFFF;
+    --surface-2:#F6EBF2;
+    --border:#E9E1E6;
+
+    --plum:#25122C;
+    --plum-2:#3A1F42;
+    --magenta:#D80D83;
+    --magenta-deep:#A1075F;
+    --pink:#E6BBD3;
+    --pink-soft:#F6E4EE;
+    --gold:#765938;
+    --grey:#9A9899;
+    --grey-dark:#6E6A6E;
+    --red:#E4472E;
+
+    --text:#25122C;
+    --muted:#6E6A6E;
+    --muted-2:#9A9899;
+
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:8px;
+    --maxw:1180px;
+    --disp:'Baloo 2', sans-serif;
+    --body:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{position:relative;}
+  h1,h2,h3{font-family:var(--disp); letter-spacing:0;}
+  ::selection{background:var(--magenta); color:#fff;}
+  :focus-visible{outline:2px solid var(--magenta); outline-offset:3px; border-radius:4px;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 26px; border-radius:999px; font-weight:700; font-size:15px;
+    cursor:pointer; border:1px solid transparent; transition:transform .15s ease, filter .15s ease, background .15s;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--magenta); color:#fff;}
+  .btn-primary:hover{background:var(--magenta-deep);}
+  .btn-ghost{background:transparent; color:var(--plum); border-color:var(--border);}
+  .btn-ghost:hover{border-color:var(--grey);}
+  .btn-outline-lime{background:transparent; color:var(--magenta); border-color:var(--magenta);}
+  .btn-outline-lime:hover{background:var(--pink-soft);}
+  .btn-on-dark{background:#fff; color:var(--magenta);}
+  .btn-on-dark:hover{background:var(--pink-soft);}
+  .btn-sm{padding:9px 16px; font-size:13px;}
+  .btn-block{width:100%;}
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--magenta); margin-bottom:14px;
+  }
+  .eyebrow::before{content:''; width:16px; height:2px; background:var(--magenta); display:inline-block;}
+  .eyebrow.on-dark{color:var(--pink);}
+  .eyebrow.on-dark::before{background:var(--pink);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.9); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{display:flex; align-items:center; justify-content:space-between; height:76px; gap:20px;}
+  .logo{display:flex; align-items:center; gap:8px;}
+  .logo .hand-mark{width:30px; height:30px; flex-shrink:0;}
+  .logo .hand-mark path,.logo .hand-mark rect{fill:var(--magenta);}
+  .logo span{font-family:var(--disp); font-weight:700; font-size:26px; color:var(--magenta); letter-spacing:0.01em;}
+  nav.main-nav{display:flex; align-items:center; gap:30px;}
+  nav.main-nav a{
+    font-size:13.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--plum); transition:color .15s;
+    position:relative; padding:4px 0;
+  }
+  nav.main-nav a:hover{color:var(--magenta);}
+  .header-cta{display:flex; align-items:center; gap:10px;}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
+  .burger span{width:22px; height:2px; background:var(--plum); display:block; border-radius:2px;}
+
+  /* Mobile drawer */
+  .mobile-drawer{
+    position:fixed; inset:0; background:var(--white); z-index:200; transform:translateX(100%);
+    transition:transform .3s ease; padding:24px; overflow-y:auto;
+  }
+  .mobile-drawer.open{transform:translateX(0);}
+  .mobile-drawer .drawer-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;}
+  .mobile-drawer nav{display:flex; flex-direction:column; gap:6px; margin-bottom:28px;}
+  .mobile-drawer nav a{font-size:22px; font-weight:700; padding:14px 4px; border-bottom:1px solid var(--border); color:var(--plum);}
+  .close-btn{background:none; border:0; color:var(--plum); font-size:26px; cursor:pointer; line-height:1;}
+
+  /* ---------- Hero (gradient banner) ---------- */
+  .hero{
+    background:linear-gradient(135deg, var(--magenta) 0%, var(--plum) 78%);
+    position:relative; overflow:hidden; padding:70px 0 0; color:#fff;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; opacity:.5; pointer-events:none;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,255,255,0.12), transparent 40%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 90px);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; padding-bottom:56px; position:relative;
+  }
+  .hero h1{font-size:50px; line-height:1.05; font-weight:700; margin-bottom:20px;}
+  .hero h1 em{font-style:normal; color:var(--pink);}
+  .hero p.lead{font-size:17px; color:rgba(255,255,255,0.82); max-width:480px; margin-bottom:30px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:30px;}
+  .hero-trust{display:flex; gap:26px; flex-wrap:wrap;}
+  .hero-trust .stat b{display:block; font-family:var(--disp); font-size:22px; font-weight:700; color:var(--pink);}
+  .hero-trust .stat span{font-size:12px; color:rgba(255,255,255,0.65); text-transform:uppercase; letter-spacing:.06em;}
+
+  .hero-card{
+    background:#fff; color:var(--text); border-radius:var(--radius-lg); padding:22px;
+    box-shadow:0 30px 60px -20px rgba(20,5,20,0.55);
+  }
+  .hero-card .hc-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;}
+  .live-badge{
+    display:inline-flex; align-items:center; gap:6px; background:rgba(228,71,46,0.1); color:var(--red);
+    font-size:11px; font-weight:800; letter-spacing:.06em; padding:5px 10px; border-radius:999px;
+  }
+  .live-dot{width:6px; height:6px; border-radius:50%; background:var(--red); animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.25;}}
+  .match-row{
+    display:flex; align-items:center; justify-content:space-between; padding:13px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .match-row:last-child{border-bottom:0;}
+  .match-teams{font-size:14px; font-weight:700;}
+  .match-meta{font-size:11px; color:var(--muted-2); margin-top:3px;}
+  .odds-set{display:flex; gap:6px;}
+  .odd{
+    background:var(--pink-soft); border:1px solid var(--border); border-radius:8px; padding:7px 10px;
+    font-family:var(--disp); font-size:13px; font-weight:700; min-width:48px; text-align:center; color:var(--magenta);
+    transition:.15s;
+  }
+  .odd:hover{border-color:var(--magenta); background:var(--magenta); color:#fff; cursor:pointer;}
+
+  /* Ticker */
+  .ticker-wrap{background:var(--plum); overflow:hidden;}
+  .ticker-track{display:flex; width:max-content; animation:scroll-left 32s linear infinite;}
+  .ticker-track:hover{animation-play-state:paused;}
+  @keyframes scroll-left{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  .ticker-item{display:flex; align-items:center; gap:10px; padding:14px 28px; font-size:13px; white-space:nowrap; border-right:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.85);}
+  .ticker-item b{color:var(--pink); font-family:var(--disp);}
+  .ticker-item .tt-down{color:#ff9f8c;}
+
+  /* ---------- Section shell ---------- */
+  .section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:33px; font-weight:700; margin-bottom:12px; color:var(--plum);}
+  .section-head p{color:var(--muted); font-size:15.5px;}
+  .alt-bg{background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+
+  /* Advantages */
+  .adv-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+  .adv-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:26px;
+    transition:border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .adv-card:hover{border-color:var(--magenta); transform:translateY(-3px); box-shadow:0 16px 30px -18px rgba(126,11,101,0.35);}
+  .adv-icon{
+    width:44px; height:44px; border-radius:10px; background:var(--pink-soft); color:var(--magenta);
+    display:flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:16px; font-family:var(--disp); font-weight:700;
+  }
+  .adv-card:nth-child(3n+2) .adv-icon{background:#F1E9DF; color:var(--gold);}
+  .adv-card h3{font-size:17px; margin-bottom:8px; font-weight:600; color:var(--plum);}
+  .adv-card p{font-size:14px; color:var(--muted);}
+
+  /* Promo */
+  .promo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .promo-card{
+    border-radius:var(--radius-lg); padding:26px; position:relative; overflow:hidden;
+    border:1px solid var(--border); background:var(--surface); display:flex; flex-direction:column; min-height:230px;
+  }
+  .promo-card.featured{background:linear-gradient(160deg, var(--magenta), var(--plum) 120%); border-color:transparent; color:#fff;}
+  .promo-tag{
+    align-self:flex-start; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+    background:var(--surface-2); color:var(--muted); padding:5px 10px; border-radius:999px; margin-bottom:16px;
+  }
+  .promo-card.featured .promo-tag{background:rgba(255,255,255,0.18); color:#fff;}
+  .promo-card h3{font-size:20px; margin-bottom:8px; color:var(--plum);}
+  .promo-card.featured h3{color:#fff;}
+  .promo-card p{font-size:13.5px; color:var(--muted); margin-bottom:18px; flex-grow:1;}
+  .promo-card.featured p{color:rgba(255,255,255,0.82);}
+  .promo-fine{font-size:11px; color:var(--muted-2); margin-top:14px;}
+  .promo-card.featured .promo-fine{color:rgba(255,255,255,0.55);}
+
+  /* Popular sections (sport tiles) */
+  .tiles-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:14px;}
+  .tile{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:20px 14px; text-align:center; transition:.2s;
+  }
+  .tile:hover{border-color:var(--magenta); background:var(--pink-soft);}
+  .tile .tile-ic{font-size:26px; margin-bottom:10px;}
+  .tile span{font-size:13px; font-weight:700; color:var(--plum);}
+
+  /* Social proof */
+  .proof-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:52px;}
+  .proof-stat{border:1px solid var(--border); border-radius:var(--radius-md); padding:24px; background:var(--surface);}
+  .proof-stat b{display:block; font-family:var(--disp); font-size:30px; color:var(--magenta); font-weight:700;}
+  .proof-stat span{font-size:12.5px; color:var(--muted); display:block; margin-top:6px;}
+  .partner-row{
+    display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+    padding:26px; border:1px dashed var(--border); border-radius:var(--radius-md);
+  }
+  .partner-chip{font-family:var(--disp); font-weight:600; color:var(--grey-dark); font-size:15px; letter-spacing:.02em;}
+
+  /* How-to */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .step{position:relative; padding:26px 20px 20px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface);}
+  .step .num{
+    font-family:var(--disp); font-size:13px; font-weight:700; color:#fff; background:var(--magenta);
+    width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .step:nth-child(2n) .num{background:var(--gold);}
+  .step h3{font-size:15.5px; margin-bottom:8px; font-weight:600; color:var(--plum);}
+  .step p{font-size:13.5px; color:var(--muted);}
+  .step-arrow{position:absolute; top:38px; right:-24px; color:var(--muted-2); font-size:18px;}
+  .step:last-child .step-arrow{display:none;}
+
+  /* FAQ */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:0; color:var(--plum); font-family:var(--body);
+    font-size:16px; font-weight:700; padding:20px 4px; display:flex; justify-content:space-between; align-items:center;
+    cursor:pointer; gap:16px;
+  }
+  .faq-q .plus{font-size:20px; color:var(--magenta); transition:transform .25s; flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{padding:0 4px 20px; color:var(--muted); font-size:14.5px; max-width:640px;}
+
+  /* Final CTA */
+  .final-cta{
+    background:linear-gradient(135deg, var(--magenta), var(--plum) 85%); color:#fff;
+    border-radius:var(--radius-lg); padding:52px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;
+  }
+  .final-cta h2{font-size:30px; font-weight:700; max-width:480px; color:#fff;}
+  .final-cta p{font-size:14px; margin-top:8px; max-width:440px; color:rgba(255,255,255,0.78);}
+
+  /* Footer */
+  footer{background:#fff; border-top:1px solid var(--border); position:relative; overflow:hidden;}
+  .footer-watermark{
+    position:absolute; top:-40px; left:0; right:0; text-align:center; font-family:var(--disp); font-weight:700;
+    font-size:220px; color:var(--surface-2); letter-spacing:-0.02em; user-select:none; pointer-events:none; line-height:1;
+    white-space:nowrap; overflow:hidden;
+  }
+  .footer-touch{
+    padding:70px 0 40px; border-bottom:1px solid var(--border); position:relative;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .footer-touch .ft-brand{display:flex; flex-direction:column; gap:16px;}
+  .foot-social{display:flex; gap:10px;}
+  .foot-social a{
+    width:34px; height:34px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center;
+    justify-content:center; font-size:13px; color:var(--magenta); transition:.15s;
+  }
+  .foot-social a:hover{background:var(--magenta); color:#fff; border-color:var(--magenta);}
+  .footer-touch .ft-contact{text-align:right;}
+  .footer-touch .ft-contact h3{font-family:var(--disp); font-size:30px; color:var(--magenta); margin-bottom:10px;}
+  .footer-touch .ft-contact a{font-size:15px; color:var(--muted); text-decoration:underline;}
+
+  .footer-top{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:30px; padding:44px 0;}
+  .foot-col h4{font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted-2); margin-bottom:16px;}
+  .foot-col ul{display:flex; flex-direction:column; gap:11px;}
+  .foot-col a{font-size:14px; color:var(--muted);}
+  .foot-col a:hover{color:var(--magenta);}
+  .footer-brand p{font-size:13px; color:var(--muted); max-width:280px;}
+
+  .responsible-box{
+    display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; text-align:center;
+    padding:20px 0; border-top:1px solid var(--border);
+  }
+  .age-badge{
+    flex-shrink:0; width:30px; height:30px; border-radius:50%; border:2px solid var(--red); display:flex;
+    align-items:center; justify-content:center; font-family:var(--disp); font-weight:700; font-size:11px; color:var(--red);
+  }
+  .responsible-box p{font-size:12.5px; color:var(--grey-dark); line-height:1.6; max-width:760px;}
+  .footer-bottom{
+    text-align:center; padding:16px 0 30px; font-size:12.5px; color:var(--muted-2);
+  }
+  .footer-bottom a{color:var(--muted-2); text-decoration:underline;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    nav.main-nav{display:none;}
+    .header-cta .btn-ghost{display:none;}
+    .burger{display:flex;}
+    .hero-grid{grid-template-columns:1fr; gap:36px;}
+    .hero h1{font-size:36px;}
+    .adv-grid{grid-template-columns:repeat(2,1fr);}
+    .promo-grid{grid-template-columns:1fr; }
+    .tiles-grid{grid-template-columns:repeat(3,1fr);}
+    .proof-stats{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .step-arrow{display:none;}
+    .footer-top{grid-template-columns:repeat(2,1fr);}
+    .final-cta{padding:34px;}
+    .final-cta h2{font-size:24px;}
+    .footer-watermark{font-size:140px;}
+    .footer-touch{flex-direction:column; align-items:flex-start; text-align:left;}
+    .footer-touch .ft-contact{text-align:left;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 18px;}
+    .section{padding:60px 0;}
+    .hero{padding-top:34px;}
+    .hero h1{font-size:28px;}
+    .hero p.lead{font-size:15px;}
+    .hero-actions .btn{flex:1;}
+    .adv-grid{grid-template-columns:1fr;}
+    .tiles-grid{grid-template-columns:repeat(2,1fr);}
+    .proof-stats{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;}
+    .section-head h2{font-size:25px;}
+    .final-cta{flex-direction:column; align-items:flex-start;}
+    .logo span{font-size:21px;}
+    .footer-watermark{font-size:90px; top:-14px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .live-dot{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="/" class="logo">
+      <svg class="hand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="8" y="27" width="24" height="19" rx="9.5"/>
+        <rect x="9" y="3" width="9.5" height="30" rx="4.75" transform="rotate(-14 13.75 18)"/>
+        <rect x="21.5" y="3" width="9.5" height="30" rx="4.75" transform="rotate(14 26.25 18)"/>
+      </svg>
+      <span>vbet</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#live">Live</a>
+      <a href="#sport">Спорт</a>
+      <a href="#kasyno">Казино</a>
+      <a href="#promo">Акції</a>
+      <a href="#dovira">Про нас</a>
+      <a href="#faq">Допомога</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#" class="btn btn-ghost btn-sm">Увійти</a>
+      <a href="#" class="btn btn-primary btn-sm">Реєстрація</a>
+      <button class="burger" aria-label="Відкрити меню" id="burgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-top">
+    <a href="#top" class="logo">
+      <svg class="hand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="8" y="27" width="24" height="19" rx="9.5"/>
+        <rect x="9" y="3" width="9.5" height="30" rx="4.75" transform="rotate(-14 13.75 18)"/>
+        <rect x="21.5" y="3" width="9.5" height="30" rx="4.75" transform="rotate(14 26.25 18)"/>
+      </svg>
+      <span>vbet</span>
+    </a>
+    <button class="close-btn" id="closeDrawer" aria-label="Закрити меню">&times;</button>
+  </div>
+  <nav>
+    <a href="#live">Live</a>
+    <a href="#sport">Спорт</a>
+    <a href="#kasyno">Казино</a>
+    <a href="#promo">Акції</a>
+    <a href="#dovira">Про нас</a>
+    <a href="#faq">Допомога</a>
+  </nav>
+  <a href="#" class="btn btn-primary btn-block" style="margin-bottom:12px;">Реєстрація</a>
+  <a href="#" class="btn btn-ghost btn-block">Увійти</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow on-dark">Спорт · Live · Казино</span>
+          <h1>Роби ставки впевнено — <em>з коефіцієнтами, яким довіряють</em></h1>
+          <p class="lead">Прематч і live-лінія на тисячі подій щодня, миттєве оновлення коефіцієнтів і виплати без затримок. Все, що потрібно для ставки — в одному застосунку.</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-on-dark">Почати грати</a>
+            <a href="#promo" class="btn" style="border:1px solid rgba(255,255,255,0.5); color:#fff;">Отримати бонус 100%</a>
+          </div>
+          <div class="hero-trust">
+            <div class="stat"><b>20+</b><span>років на ринку</span></div>
+            <div class="stat"><b>30 000+</b><span>подій щодня</span></div>
+            <div class="stat"><b>&lt; 15 хв</b><span>середня виплата</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hc-head">
+            <span class="live-badge"><span class="live-dot"></span>LIVE ЗАРАЗ</span>
+            <span style="font-size:12px; color:var(--muted-2);">1X2</span>
+          </div>
+          <div class="match-row">
+            <div>
+              <div class="match-teams">Динамо — Шахтар</div>
+              <div class="match-meta">УПЛ · 63' · 1:1</div>
+            </div>
+            <div class="odds-set">
+              <span class="odd">2.10</span><span class="odd">3.40</span><span class="odd">2.95</span>
+            </div>
+          </div>
+          <div class="match-row">
+            <div>
+              <div class="match-teams">Реал Мадрид — Барселона</div>
+              <div class="match-meta">Ла Ліга · сьогодні 21:00</div>
+            </div>
+            <div class="odds-set">
+              <span class="odd">2.25</span><span class="odd">3.60</span><span class="odd">2.80</span>
+            </div>
+          </div>
+          <div class="match-row">
+            <div>
+              <div class="match-teams">Джокович — Алькарас</div>
+              <div class="match-meta">ATP · 2 сет · 4:3</div>
+            </div>
+            <div class="odds-set">
+              <span class="odd">1.65</span><span class="odd">2.20</span>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary btn-block" style="margin-top:16px;">Всі live-події</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker-wrap">
+      <div class="ticker-track" id="tickerTrack">
+        <div class="ticker-item">Мілан — Інтер <b>2.40</b> <span class="tt-down">▼</span></div>
+        <div class="ticker-item">Ліверпуль — Челсі <b>1.95</b> ▲</div>
+        <div class="ticker-item">Байєрн — Дортмунд <b>1.70</b> ▲</div>
+        <div class="ticker-item">Australian Open: Свьонтек <b>1.55</b> ▲</div>
+        <div class="ticker-item">НБА: Лейкерс — Селтікс <b>2.05</b> <span class="tt-down">▼</span></div>
+        <div class="ticker-item">Кіберспорт: Navi — G2 <b>1.80</b> ▲</div>
+        <div class="ticker-item">ПСЖ — Марсель <b>1.60</b> ▲</div>
+        <div class="ticker-item">Формула 1: Гран-прі <b>3.20</b> ▲</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section class="section" id="dovira">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Чому VBET</span>
+        <h2>Побудовано для тих, хто ставить регулярно</h2>
+        <p>Ліцензована платформа з фокусом на швидкість, глибину лінії та зручність — на телефоні чи на десктопі.</p>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-card">
+          <div class="adv-icon">✓</div>
+          <h3>Ліцензія та безпека</h3>
+          <p>Діяльність під офіційною ліцензією, шифрування даних і захист платежів на кожному кроці.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">≡</div>
+          <h3>Глибока лінія подій</h3>
+          <p>Десятки видів спорту та сотні ринків на кожен матч — від переможця до тоталів і форних.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">⚡</div>
+          <h3>Швидкі виплати</h3>
+          <p>Виведення коштів обробляється в пріоритетному порядку — без зайвих запитів.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">▢</div>
+          <h3>Застосунок і мобільна версія</h3>
+          <p>Повний функціонал ставок у кишені: швидкий вхід, зручний кешаут, push-сповіщення по матчах.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">%</div>
+          <h3>Бонуси та акції</h3>
+          <p>Привітальна пропозиція для нових гравців і регулярні акції для постійних клієнтів.</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">◔</div>
+          <h3>Підтримка 24/7</h3>
+          <p>Служба підтримки на зв'язку цілодобово в чаті, пошті та за телефоном.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO -->
+  <section class="section alt-bg" id="promo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Бонуси</span>
+        <h2>Пропозиції, які підсилюють кожну ставку</h2>
+        <p>Умови вказані коротко — повні правила кожної акції доступні в особистому кабінеті.</p>
+      </div>
+      <div class="promo-grid">
+        <div class="promo-card featured">
+          <span class="promo-tag">Для нових гравців</span>
+          <h3>Привітальний бонус 100%</h3>
+          <p>Подвоюємо перше поповнення рахунку — використовуйте бонусні кошти на прематч та live-ставки.</p>
+          <a href="#" class="btn btn-on-dark btn-block">Отримати бонус</a>
+          <div class="promo-fine">Діють умови відіграшу та мінімальний коефіцієнт.</div>
+        </div>
+        <div class="promo-card">
+          <span class="promo-tag">Щотижня</span>
+          <h3>Фрибети за активність</h3>
+          <p>Робіть ставки регулярно та отримуйте безкоштовні ставки на популярні матчі тижня.</p>
+          <a href="#" class="btn btn-outline-lime btn-block">Умови акції</a>
+          <div class="promo-fine">Нараховується автоматично за виконання умов.</div>
+        </div>
+        <div class="promo-card">
+          <span class="promo-tag">Захист ставки</span>
+          <h3>Кешбек і страховка</h3>
+          <p>Поверніть частину ставки, навіть якщо прогноз не зіграв — у вибраних турнірах.</p>
+          <a href="#" class="btn btn-outline-lime btn-block">Дізнатися більше</a>
+          <div class="promo-fine">Поширюється на вказані ринки та ліги.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR SECTIONS -->
+  <section class="section" id="sport">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Розділи</span>
+        <h2>Оберіть свій напрямок</h2>
+        <p>Від топ-ліг до кіберспорту — швидкий доступ до улюблених ринків.</p>
+      </div>
+      <div class="tiles-grid">
+        <a href="#" class="tile"><div class="tile-ic">⚽</div><span>Футбол</span></a>
+        <a href="#" class="tile"><div class="tile-ic">🎾</div><span>Теніс</span></a>
+        <a href="#" class="tile"><div class="tile-ic">🏀</div><span>Баскетбол</span></a>
+        <a href="#" class="tile" id="kasyno"><div class="tile-ic">🎰</div><span>Казино</span></a>
+        <a href="#" class="tile"><div class="tile-ic">🎮</div><span>Кіберспорт</span></a>
+        <a href="#" class="tile"><div class="tile-ic">🏁</div><span>Віртуальний спорт</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="section alt-bg" id="live">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Довіра гравців</span>
+        <h2>Платформа з історією та партнерствами у спорті</h2>
+      </div>
+      <div class="proof-stats">
+        <div class="proof-stat"><b>20+</b><span>років досвіду в індустрії</span></div>
+        <div class="proof-stat"><b>10+</b><span>країн присутності</span></div>
+        <div class="proof-stat"><b>500+</b><span>ринків на топ-матч</span></div>
+        <div class="proof-stat"><b>24/7</b><span>підтримка гравців</span></div>
+      </div>
+      <div class="partner-row">
+        <span class="partner-chip">AS MONACO</span>
+        <span class="partner-chip">OGC NICE</span>
+        <span class="partner-chip">УКРАЇНСЬКА ФУТБОЛЬНА ЛІГА</span>
+        <span class="partner-chip">CHORNOMORETS</span>
+        <span class="partner-chip">MALTA FA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Як почати</span>
+        <h2>Чотири кроки до першої ставки</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Зареєструйтесь</h3>
+          <p>Створіть акаунт за декілька хвилин, вказавши базові дані.</p>
+          <div class="step-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Поповніть рахунок</h3>
+          <p>Оберіть зручний спосіб оплати з переліку доступних методів.</p>
+          <div class="step-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Зробіть ставку</h3>
+          <p>Оберіть подію, ринок і коефіцієнт — прематч або live.</p>
+          <div class="step-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <h3>Виведіть виграш</h3>
+          <p>Замовте виведення коштів — обробка відбувається пріоритетно.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt-bg" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Питання</span>
+        <h2>Часті запитання</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button class="faq-q">Як зареєструватися на VBET? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Натисніть «Реєстрація», заповніть коротку форму та підтвердьте акаунт — процес займає кілька хвилин.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Які способи поповнення рахунку доступні? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Доступні картки, банківські перекази та популярні електронні гаманці — повний перелік показано в кабінеті під час поповнення.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Скільки часу займає виведення коштів? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Стандартна обробка запиту — до кількох хвилин, точний час залежить від обраного методу виплати.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Як отримати привітальний бонус? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Бонус активується автоматично після першого поповнення — умови відіграшу вказані на сторінці акції.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Чи є мобільний застосунок? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Так, застосунок доступний для основних мобільних платформ і повторює функціонал десктопної версії.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section">
+    <div class="wrap">
+      <div class="final-cta">
+        <div>
+          <h2>Готові зробити першу ставку?</h2>
+          <p>Реєстрація займає кілька хвилин. Бонус нараховується після першого поповнення рахунку.</p>
+        </div>
+        <a href="#" class="btn btn-on-dark">Реєстрація на VBET</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-touch">
+    <div class="footer-watermark" aria-hidden="true">vbet</div>
+    <div class="ft-brand">
+      <a href="/" class="logo">
+        <svg class="hand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="8" y="27" width="24" height="19" rx="9.5"/>
+        <rect x="9" y="3" width="9.5" height="30" rx="4.75" transform="rotate(-14 13.75 18)"/>
+        <rect x="21.5" y="3" width="9.5" height="30" rx="4.75" transform="rotate(14 26.25 18)"/>
+        </svg>
+        <span>vbet</span>
+      </a>
+      <div class="foot-social">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="X">x</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="YouTube">yt</a>
+      </div>
+    </div>
+    <div class="ft-contact">
+      <h3>Будьмо на зв'язку</h3>
+      <a href="mailto:info@vbet.plus">info@vbet.plus</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p>Онлайн-оператор ставок на спорт та ігор з багаторічним досвідом у галузі iGaming.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Продукти</h4>
+        <ul>
+          <li><a href="#sport">Спорт</a></li>
+          <li><a href="#live">Live-ставки</a></li>
+          <li><a href="#kasyno">Казино</a></li>
+          <li><a href="#promo">Акції</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Компанія</h4>
+        <ul>
+          <li><a href="#dovira">Про нас</a></li>
+          <li><a href="#">Кар'єра</a></li>
+          <li><a href="#">Партнери</a></li>
+          <li><a href="#">Преса</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Допомога</h4>
+        <ul>
+          <li><a href="#faq">Часті запитання</a></li>
+          <li><a href="#">Контакти підтримки</a></li>
+          <li><a href="#">Правила та умови</a></li>
+          <li><a href="#">Відповідальна гра</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="responsible-box">
+      <div class="age-badge">18+</div>
+      <p>Грайте відповідально. Азартні ігри пов'язані з ризиком і можуть спричинити залежність. Переконайтесь, що розумієте ризики, і встановлюйте ліміти на гру.</p>
+    </div>
+    <div class="footer-bottom">
+      © VBET 2026. Усі права захищено. · <a href="#">Політика конфіденційності</a> · <a href="#">Умови використання</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burgerBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const closeDrawer = document.getElementById('closeDrawer');
+  burger.addEventListener('click', () => drawer.classList.add('open'));
+  closeDrawer.addEventListener('click', () => drawer.classList.remove('open'));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => drawer.classList.remove('open')));
+
+  const track = document.getElementById('tickerTrack');
+  track.innerHTML += track.innerHTML;
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    if(item.classList.contains('open')){ a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  document.querySelectorAll('.odd').forEach(o => {
+    o.addEventListener('click', () => {
+      document.querySelectorAll('.odd').forEach(x => { x.style.background=''; x.style.color=''; });
+      o.style.background = 'var(--magenta)';
+      o.style.color = '#fff';
+    });
+  });
+</script>
+
+</body>
+</html>
